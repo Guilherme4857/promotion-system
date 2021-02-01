@@ -1,0 +1,14 @@
+<h1>Promoções</h1>
+<%if @promotions == []%>
+  <h2>Nenhuma promoção cadastrada</h2>
+<%else%>
+  <% @promotions.each do |promotion|%>
+  <p>
+  <div>Nome: <%=promotion.name %></div>
+  <div>Descrição: <%= promotion.description %></div>
+  <div>Porcentagem de desconto: <%= number_to_percentage promotion.discount_rate, precision: 2, separator: ','%></div>
+  <div><%= link_to promotion.name, promotion_path(promotion) %></div>
+  </p>
+  <% end %>
+<% end %>
+<div><%= link_to 'Voltar', root_path %></div>
