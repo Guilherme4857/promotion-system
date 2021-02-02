@@ -1,0 +1,15 @@
+<%=form_with model: Promotion.new do |f|%>
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+  <%=f.label :description%>
+  <%=f.text_field :description%>
+  <%=f.label :code%>
+  <%=f.text_field :code%>
+  <%=f.label :discount_rate%>
+  <%=f.text_field :discount_rate%>
+  <%=f.label :coupon_quantity%>
+  <%=f.text_field :coupon_quantity%>
+  <%=f.label :expiration_date%>
+  <%=f.text_field :expiration_date%>
+  <%=f.submit "Criar promoção"%>
+<%end%>
