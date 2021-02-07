@@ -16,5 +16,6 @@
 <div><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post%></div>
 
 <%@promotion.coupons.each do |coupon|%>
-  <%=coupon.code%>
+  <div><%=coupon.code%>
+  <%= link_to 'Desativar cupom', inactivate_coupon_path(coupon), method: :post%></div>
 <%end%>
