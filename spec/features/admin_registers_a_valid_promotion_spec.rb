@@ -12,7 +12,7 @@ feature 'Admin registers a valid promotion' do
     fill_in 'Desconto', with: ''
     fill_in 'Quantidade de cupons', with: ''
     fill_in 'Data de término', with: ''
-    click_on 'Criar promoção'
+    click_on 'Criar Promoção'
     expect(page).to have_content('Não foi possível criar a promoção')
     expect(page).to have_content("Nome não pode ficar em branco")
     expect(page).to have_content("Código não pode ficar em branco")
@@ -30,7 +30,7 @@ feature 'Admin registers a valid promotion' do
     click_on 'Promoções'
     click_on 'Registrar uma promoção'
     fill_in 'Código', with: 'NATAL10'
-    click_on 'Criar promoção'
+    click_on 'Criar Promoção'
 
     expect(page).to have_content('já está em uso')
   end
