@@ -9,6 +9,9 @@ pt-BR:
         one: Cupom
         other: Cupons
 
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       promotion:
         name: Nome
@@ -21,4 +24,6 @@ pt-BR:
       coupon:
         code: Código
       
-      
+      user:
+        email: E-mail
+        password: Senha

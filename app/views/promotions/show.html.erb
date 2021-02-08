@@ -7,6 +7,7 @@
 <div><%= link_to 'Voltar', promotions_path %></div>
 
 <div>Nome: <%= @promotion.name%></div>
+<span>Cadastrada por: <%=@promotion.user.email%></span>
 <div>Descrição: <%= @promotion.description%></div>
 <div>Porcentagem de desconto: <%= number_to_percentage @promotion.discount_rate, precision: 2, separator: ','%></div>
 <div>Código: <%= @promotion.code%></div>
@@ -16,6 +17,10 @@
 <div><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post%></div>
 
 <%@promotion.coupons.each do |coupon|%>
-  <div><%=coupon.code%>
-  <%= link_to 'Desativar cupom', inactivate_coupon_path(coupon), method: :post%></div>
+  <div id="coupon-<%= coupon.id%>"><%=coupon.code%> 
+  <%= "Cupom #{coupon.code} #{t(".#{coupon.status}")}"%>
+  <%if coupon.active?%>
+    <%= link_to 'Desativar cupom', inactivate_coupon_path(coupon), method: :post%>
+  <%end%>
+  </div>
 <%end%>
