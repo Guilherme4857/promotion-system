@@ -1,0 +1,37 @@
+<%if @promotion.errors.any?%>
+  <h1>Não foi possível criar a promoção</h1>
+  <h2>Erros</h2>
+  <%@promotion.errors.full_messages.each do |message|%>
+    <p><%= message%></p>
+  <%end%>
+<%end%>
+
+<%=form_with model: @promotion do |f|%>
+  <div>
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+  </div>
+  <div>
+  <%=f.label :description%>
+  <%=f.text_field :description%>
+  </div>
+  <div>
+  <%=f.label :code%>
+  <%=f.text_field :code%>
+  </div>
+  <div>
+  <%=f.label :discount_rate%>
+  <%=f.text_field :discount_rate%>
+  </div>
+  <div>
+  <%=f.label :coupon_quantity%>
+  <%=f.text_field :coupon_quantity%>
+  </div>
+  <div>
+  <%=f.label :expiration_date%>
+  <%=f.text_field :expiration_date%>
+  </div>
+  <div>
+  <%=f.submit%>
+  </div>
+<%end%>

@@ -6,7 +6,9 @@
 
 <div><%= link_to 'Voltar', promotions_path %></div>
 
-<div>Nome: <%= @promotion.name%></div>
+<div>
+Nome: <%= @promotion.name%> <%= link_to 'Editar', edit_promotion_path(@promotion)%>
+</div>
 <span>Cadastrada por: <%=@promotion.user.email%></span>
 <div>Descrição: <%= @promotion.description%></div>
 <div>Porcentagem de desconto: <%= number_to_percentage @promotion.discount_rate, precision: 2, separator: ','%></div>
