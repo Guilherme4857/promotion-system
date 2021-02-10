@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 feature 'Admin inactivate coupon' do 
+  scenario 'must be signed in' do
+    visit root_path
+    click_on 'Promoções'
+    
+    expect(current_path).to eq new_user_session_path
+  end
   scenario 'successfully' do
     user = User.create!(email: 'guilherme@email.com', password: '123456')
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',

@@ -1,5 +1,6 @@
 class Promotion < ApplicationRecord
   has_many :coupons
+  has_one :promotion_approval
   belongs_to :user
   
   validates :name, :code, :discount_rate, :coupon_quantity, 
@@ -13,6 +14,18 @@ class Promotion < ApplicationRecord
         coupons.create!(code: "#{code}-#{number.to_s.rjust(4, '0')}") 
       end
     end
+  end
 
+  def approve!(approval_user)
+    return false if approval_user == user
+    PromotionApproval.create(promotion: self, user: approval_user)
+  end
+
+  def approved?
+    promotion_approval
+  end
+
+  def approver
+    promotion_approval.user
   end
 end
