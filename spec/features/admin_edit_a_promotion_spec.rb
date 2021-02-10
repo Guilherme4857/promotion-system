@@ -96,4 +96,37 @@ feature 'Admin edit a promotion' do
     expect(page).to have_content('já está em uso')
   end
 
+  scenario 'code must content letters' do
+    user = User.create!(email: 'guilherme@email.com', password: '123456')
+    login_as user, scope: :user
+    
+    visit new_promotion_path
+    
+    fill_in 'Nome', with: 'Natal'
+    fill_in 'Descrição', with: 'Promoção de Natal'
+    fill_in 'Código', with: '10'
+    fill_in 'Desconto', with: '10'
+    fill_in 'Quantidade de cupons', with: 100
+    fill_in 'Data de término', with: '22/12/2023'
+    click_on 'Criar Promoção'
+
+    expect(page).to have_content('Código precisa conter letras')
+  end
+
+  scenario 'code must be uppercase' do
+    user = User.create!(email: 'guilherme@email.com', password: '123456')
+    login_as user, scope: :user
+    
+    visit new_promotion_path
+
+    fill_in 'Nome', with: 'Natal'
+    fill_in 'Descrição', with: 'Promoção de Natal'
+    fill_in 'Código', with: 'Natal10'
+    fill_in 'Desconto', with: '10'
+    fill_in 'Quantidade de cupons', with: 100
+    fill_in 'Data de término', with: '22/12/2023'
+    click_on 'Criar Promoção'
+
+    expect(page).to have_content('Código precisa ter todas as letras maiúsculas')
+  end
 end
