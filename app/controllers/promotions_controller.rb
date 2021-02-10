@@ -44,6 +44,12 @@ class PromotionsController < ApplicationController
     end
   end
 
+  def destroy
+    promotion = Promotion.find(params[:id])
+    promotion.destroy
+    redirect_to promotions_path
+  end
+
   def generate_coupons
     promotion = Promotion.find(params[:id])
     promotion.generate_coupons!

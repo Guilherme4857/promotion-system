@@ -4,10 +4,12 @@
 <%end%>
 </div>
 
+<p>
 <div><%= link_to 'Voltar', promotions_path %></div>
+</p>
 
 <div>
-Nome: <%= @promotion.name%> <%= link_to 'Editar', edit_promotion_path(@promotion)%>
+Nome: <%= @promotion.name%> 
 </div>
 <span>Cadastrada por: <%=@promotion.user.email%></span>
 <div>Descrição: <%= @promotion.description%></div>
@@ -24,7 +26,13 @@ Nome: <%= @promotion.name%> <%= link_to 'Editar', edit_promotion_path(@promotion
 <%end%>
 </div>
 
+<div>
+<%= link_to 'Editar', edit_promotion_path(@promotion)%> <%=link_to 'Apagar', promotion_path(@promotion), method: :delete%>
+</div>
+
+<p>
 <div><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post%></div>
+</p>
 
 <%@promotion.coupons.each do |coupon|%>
   <div id="coupon-<%= coupon.id%>"><%=coupon.code%> 

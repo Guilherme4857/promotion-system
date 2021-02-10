@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :promotions, only: %i[index create new edit show update] do
+  resources :promotions do
     member do
       post 'generate_coupons'
       post 'approve'
