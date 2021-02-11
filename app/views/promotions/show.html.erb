@@ -24,10 +24,10 @@ Nome: <%= @promotion.name%>
 <%if @promotion.user != current_user%>
   <%=link_to 'Aprovar Promoção', approve_promotion_path, method: :post%>
 <%end%>
-</div>
 
-<div>
-<%= link_to 'Editar', edit_promotion_path(@promotion)%> <%=link_to 'Apagar', promotion_path(@promotion), method: :delete%>
+<%= link_to 'Editar', edit_promotion_path(@promotion)%> 
+
+<%=link_to 'Apagar', promotion_path(@promotion), method: :delete%>
 </div>
 
 <p>
@@ -36,7 +36,7 @@ Nome: <%= @promotion.name%>
 
 <%@promotion.coupons.each do |coupon|%>
   <div id="coupon-<%= coupon.id%>"><%=coupon.code%> 
-  <%= "Cupom #{coupon.code} #{t(".#{coupon.status}")}"%>
+  <%=  t(".#{coupon.status}")%>
   <%if coupon.active?%>
     <%= link_to 'Desativar cupom', inactivate_coupon_path(coupon), method: :post%>
   <%end%>

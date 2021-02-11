@@ -121,4 +121,32 @@ feature 'Admin registers a promotion' do
 
     expect(page).to have_content('Código precisa ter todas as letras maiúsculas')
   end
+
+  scenario 'and choose product categories' do
+    ProductCategory.create!(name: 'Smartphones', code: 'SMARTPH')
+    ProductCategory.create!(name: 'JOgos', code: 'GAME')
+    ProductCategory.create!(name: 'Monitores', code: 'DISPLAY')
+    ProductCategory.create!(name: 'Webcams', code: 'WEBCAM')
+    user = User.create!(email: 'guilherme@email.com', password: '123456')
+    login_as user, scope: :user
+    
+    visit new_promotion_path
+
+    fill_in 'Nome', with: 'Natal'
+    fill_in 'Descrição', with: 'Promoção de Natal'
+    fill_in 'Código', with: 'NATAL10'
+    fill_in 'Desconto', with: '10'
+    fill_in 'Quantidade de cupons', with: 100
+    fill_in 'Data de término', with: '22/12/2023'
+    check 'Smartphones'
+    check 'Jogos'
+    check 'monitores'
+    click_on 'Criar Promoção'
+    
+    expect(current_path).to eq promotion_path(Promotion.last)
+    expect(page).to have_content 'Smartphones'
+    expect(page).to have_content 'Jogos'
+    expect(page).to have_content 'Monitores'
+    expect(page).not_to have_content 'Webcams'
+  end
 end
