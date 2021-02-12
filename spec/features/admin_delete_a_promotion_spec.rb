@@ -10,7 +10,7 @@ feature 'Admin delete a promotion' do
 
   scenario 'from index' do
     user = User.create!(email: 'guilherme@gmail.com', password: '123456')
-    promotion = Promotion.create(name: 'Natal', description: 'Promoção de Natal', 
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal', 
                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100, 
                                  expiration_date: '20/03/2033', user: user)
     login_as user, scope: :user

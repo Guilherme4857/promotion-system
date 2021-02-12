@@ -32,7 +32,7 @@ feature 'Admin edit a promotion' do
 
     visit root_path
     click_on 'Promoções'
-    click_on 'Natal'
+    click_on promotion.name
     click_on 'Editar'
 
     fill_in 'Nome', with: 'Black Friday'
@@ -61,16 +61,15 @@ feature 'Admin edit a promotion' do
   
     login_as user, scope: :user
   
-    visit root_path
-    click_on 'Promoções'
-    click_on 'Registrar uma promoção'
+    visit edit_promotion_path promotion
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     fill_in 'Código', with: ''
     fill_in 'Desconto', with: ''
     fill_in 'Quantidade de cupons', with: ''
     fill_in 'Data de término', with: ''
-    click_on 'Criar Promoção'
+    click_on 'Atualizar Promoção'
+    
     expect(page).to have_content('Não foi possível criar a promoção')
     expect(page).to have_content("Nome não pode ficar em branco")
     expect(page).to have_content("Código não pode ficar em branco")
@@ -84,23 +83,26 @@ feature 'Admin edit a promotion' do
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                                   expiration_date: '22/12/2033', user: user)
-    user = User.create! email: 'joao@email.com', password: '123456'
+    other_promotion = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
+                                        code: 'CYBER15', discount_rate: 15, coupon_quantity: 90,
+                                        expiration_date: '22/12/2033', user: user)
     login_as user, scope: :user
   
-    visit root_path
-    click_on 'Promoções'
-    click_on 'Registrar uma promoção'
-    fill_in 'Código', with: 'NATAL10'
-    click_on 'Criar Promoção'
+    visit edit_promotion_path promotion
+    fill_in 'Código', with: 'CYBER15'
+    click_on 'Atualizar Promoção'
   
     expect(page).to have_content('já está em uso')
   end
 
   scenario 'code must content letters' do
     user = User.create!(email: 'guilherme@email.com', password: '123456')
+    promotion = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
+                                  code: 'CYBER15', discount_rate: 15, coupon_quantity: 90,
+                                  expiration_date: '22/12/2033', user: user)
     login_as user, scope: :user
     
-    visit new_promotion_path
+    visit edit_promotion_path promotion
     
     fill_in 'Nome', with: 'Natal'
     fill_in 'Descrição', with: 'Promoção de Natal'
@@ -108,16 +110,19 @@ feature 'Admin edit a promotion' do
     fill_in 'Desconto', with: '10'
     fill_in 'Quantidade de cupons', with: 100
     fill_in 'Data de término', with: '22/12/2023'
-    click_on 'Criar Promoção'
+    click_on 'Atualizar Promoção'
 
     expect(page).to have_content('Código precisa conter letras')
   end
 
   scenario 'code must be uppercase' do
     user = User.create!(email: 'guilherme@email.com', password: '123456')
+    promotion = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
+                                  code: 'CYBER15', discount_rate: 15, coupon_quantity: 90,
+                                  expiration_date: '22/12/2033', user: user)
     login_as user, scope: :user
     
-    visit new_promotion_path
+    visit edit_promotion_path promotion
 
     fill_in 'Nome', with: 'Natal'
     fill_in 'Descrição', with: 'Promoção de Natal'
@@ -125,7 +130,7 @@ feature 'Admin edit a promotion' do
     fill_in 'Desconto', with: '10'
     fill_in 'Quantidade de cupons', with: 100
     fill_in 'Data de término', with: '22/12/2023'
-    click_on 'Criar Promoção'
+    click_on 'Atualizar Promoção'
 
     expect(page).to have_content('Código precisa ter todas as letras maiúsculas')
   end

@@ -32,6 +32,9 @@
   <%=f.text_field :expiration_date%>
   </div>
   <div>
+  <%= f.collection_check_boxes :product_category_ids, @product_category, :id, :name%>
+  </div>
+  <div>
   <%=f.submit %>
   </div>
 <%end%>

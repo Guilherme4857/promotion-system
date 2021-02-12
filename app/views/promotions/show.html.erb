@@ -31,11 +31,21 @@ Nome: <%= @promotion.name%>
 </div>
 
 <p>
+<%= @category_name%> -  <%= @category_code%>
+
+<%@promotion.product_categories.each do |product|%>
+  <div><%=product.name%> - <%=product.code%></div>
+<%end%>
+</p>
+
+<p>
 <div><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post%></div>
 </p>
 
 <%@promotion.coupons.each do |coupon|%>
-  <div id="coupon-<%= coupon.id%>"><%=coupon.code%> 
+  <div id="coupon-<%= coupon.id%>">
+  <%=@coupon%>
+  <%=coupon.code%> 
   <%=  t(".#{coupon.status}")%>
   <%if coupon.active?%>
     <%= link_to 'Desativar cupom', inactivate_coupon_path(coupon), method: :post%>

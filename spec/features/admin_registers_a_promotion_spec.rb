@@ -124,7 +124,7 @@ feature 'Admin registers a promotion' do
 
   scenario 'and choose product categories' do
     ProductCategory.create!(name: 'Smartphones', code: 'SMARTPH')
-    ProductCategory.create!(name: 'JOgos', code: 'GAME')
+    ProductCategory.create!(name: 'Jogos', code: 'GAME')
     ProductCategory.create!(name: 'Monitores', code: 'DISPLAY')
     ProductCategory.create!(name: 'Webcams', code: 'WEBCAM')
     user = User.create!(email: 'guilherme@email.com', password: '123456')
@@ -140,7 +140,7 @@ feature 'Admin registers a promotion' do
     fill_in 'Data de término', with: '22/12/2023'
     check 'Smartphones'
     check 'Jogos'
-    check 'monitores'
+    check 'Monitores'
     click_on 'Criar Promoção'
     
     expect(current_path).to eq promotion_path(Promotion.last)
