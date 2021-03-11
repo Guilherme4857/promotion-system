@@ -20,6 +20,7 @@ feature 'Admin registers a promotion' do
   end
 
   scenario 'successfully' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     user = User.create! email: 'joao@email.com', password: '123456'
     login_as user, scope: :user
 
@@ -47,6 +48,7 @@ feature 'Admin registers a promotion' do
   end
 
   scenario 'and attributes cannot be blank' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     user = User.create!(email: 'guilherme@email.com', password: '123456')
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
@@ -73,6 +75,7 @@ feature 'Admin registers a promotion' do
   end
 
   scenario 'and code must be unique' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     user = User.create!(email: 'guilherme@email.com', password: '123456')
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
@@ -89,6 +92,7 @@ feature 'Admin registers a promotion' do
   end
   
   scenario 'code must content letters' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     user = User.create!(email: 'guilherme@email.com', password: '123456')
     login_as user, scope: :user
     
@@ -106,6 +110,7 @@ feature 'Admin registers a promotion' do
   end
 
   scenario 'code must be uppercase' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     user = User.create!(email: 'guilherme@email.com', password: '123456')
     login_as user, scope: :user
     
@@ -123,6 +128,7 @@ feature 'Admin registers a promotion' do
   end
 
   scenario 'and choose product categories' do
+    allow(PaymentMethod).to receive(:all).and_return([])
     ProductCategory.create!(name: 'Smartphones', code: 'SMARTPH')
     ProductCategory.create!(name: 'Jogos', code: 'GAME')
     ProductCategory.create!(name: 'Monitores', code: 'DISPLAY')

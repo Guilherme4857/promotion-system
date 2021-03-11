@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Promotion do
+describe 'Promotion' do
   context 'validation' do
     it 'attributes cannot be blank' do
       promotion = Promotion.new
